@@ -75,7 +75,9 @@ All commits in the branch must start with `[<CODE>-XXX]` on the commit message,
 e.g. `[PCS-608]`.
 
 They should then go on to have a short explanation of what has been done in
-that commit, e.g. `[PCS-608] Change primary colors from red to green`.
+that commit, e.g:
+
+    [PCS-608] Change primary colors from red to green
 
 This allows us to easily see which issue each addition came and what it's for.
 
