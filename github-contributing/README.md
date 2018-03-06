@@ -46,7 +46,7 @@ ticket description.
 
 ### Code
 
-The second part of the branch names show what the project it is for.
+The second part of the branch names show which project it is for.
 
 For JIRA issues, it will be the associated project code (2-4 letters) from JIRA.
 
