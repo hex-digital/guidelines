@@ -1,4 +1,4 @@
-# Git(Hub) Contribution Guidelines
+# GitHub Contribution Guidelines
 
 If you've read these guidelines and just need a quick overview to follow, please
 scroll to the end, to the [Git(Hub) Workflow Overview](#github-workflow-overview).
