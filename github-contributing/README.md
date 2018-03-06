@@ -79,7 +79,8 @@ that commit, e.g:
 
     [PCS-608] Change primary colors from red to green
 
-This allows us to easily see which issue each addition came and what it's for.
+This allows us to easily see which issue each addition came from and what it's
+for.
 
 Remember to commit often, and never to rewrite commit history once you've pushed
 to origin. However, before pushing your commits, you're free to rebase and
