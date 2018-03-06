@@ -265,7 +265,7 @@ follow work through the issue/pull request process.
    deployed to Production.
 5. **Create a pull request to Staging from `conflict-XXXXX`** and then proceed as
    above, making sure the conflict branch is immediately deleted on merge.
-   DO NOT MERGE THE CONFLICT BRANCH INTO STAGING.
+   DO NOT MERGE THE CONFLICT BRANCH INTO PRODUCTION OR MASTER.
 
 
 [(top)](#contributing-to-a-github-project)
