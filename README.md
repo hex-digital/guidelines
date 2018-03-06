@@ -12,4 +12,4 @@ to refresh.
 
 Contents
 
-- [Git(Hub) Contribution Guidelines](https://github.com/hex-digital/guidelines/blob/master/github-contributing/README.md)
+- [GitHub Contribution Guidelines](https://github.com/hex-digital/guidelines/blob/master/github-contributing/README.md)
