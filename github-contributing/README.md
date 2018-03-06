@@ -230,8 +230,8 @@ follow work through the issue/pull request process.
    release attached to the issue, from the URL of the release page.
 8. **Create a Pull Request from your branch to the release branch.** This should
    contain a message stating Why you've made changed, and How you've made them.
-   The title should also use the same reference as all the commit messages.
-   It should also contain a link to the JIRA ticket in question.
+   The title should also use the same reference `[<CODE>-XXX]` as all the commit
+   messages. It should also contain a link to the JIRA ticket in question.
 9. **Once approved, merge and delete the source branch.** This is required to
    keep the repository branches clean. You can easily restore the branch from
    within the closed Pull Request in GitHub.
