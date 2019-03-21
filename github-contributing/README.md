@@ -66,6 +66,8 @@ Simply create your branch with the name as above, branching from `master`.
     git pull
     git checkout -b <branch-name>
     git push -u origin <branch-name>
+    
+> NOTE If the site has not launched yet, and your tickets are going into development (they have Fix Version v1.0.0), then you should branch from the development branch instead of master, as this will be the current base branch. When the site launches, master will be the base branch, and you can branch from there instead.
 
 [(top)](#contributing-to-a-github-project)
 
@@ -90,7 +92,20 @@ rewrite as you like.
 
 ## Submitting work for review
 
+When submitting work for review, there are two options:
+the `development` branch, or a `release` branch.
+
+### The development branch
+
+When a site is not yet launched, the development branch should be used instead of a release branch. It is easy to check this as the master branch will be behind the production branch, or production will not exist yet.
+
+All issues that will be going into the development branch will have a Fix Version of v1.0.0, so they are easy to identify in JIRA.
+
+Simply pull-request into the development branch, following the below guidelines, as if it were a release branch.
+
 ### The release branch
+
+When a site has been launched, and master is the same as production, we move to the release branch structure.
 
 Once your code is complete and pushed to origin, it needs to go into a release
 branch. A release branch is of the form `release-XXXXX` and is used to group
@@ -227,7 +242,8 @@ follow work through the issue/pull request process.
 6. **Ensure your issue has a Fix Version attached**, as this is the release that
    the ticket must go in to.
 7. **Create a release branch `release-XXXXX`** where XXXXX is the ID of the
-   release attached to the issue, from the URL of the release page.
+   release attached to the issue, from the URL of the release page. If the site
+   is not live, use the `development` branch as this release.
 8. **Create a Pull Request from your branch to the release branch.** This should
    contain a message stating Why you've made changed, and How you've made them.
    The title should also use the same reference `[<CODE>-XXX]` as all the commit
