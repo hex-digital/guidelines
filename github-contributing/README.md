@@ -69,7 +69,7 @@ Simply create your branch with the name as above, branching from `master`.
     
 > NOTE If the site has not launched yet, and your tickets are going into development (they have Fix Version v1.0.0), then you should branch from the development branch instead of master, as this will be the current base branch. When the site launches, master will be the base branch, and you can branch from there instead.
 
-[(top)](#contributing-to-a-github-project)
+[(top)](#github-contribution-guidelines)
 
 ## Committing your work
 
@@ -88,7 +88,7 @@ Remember to commit often, and never to rewrite commit history once you've pushed
 to origin. However, before pushing your commits, you're free to rebase and
 rewrite as you like.
 
-[(top)](#contributing-to-a-github-project)
+[(top)](#github-contribution-guidelines)
 
 ## Submitting work for review
 
@@ -167,7 +167,7 @@ delete the original branch.
 >Do not worry about deleting the original branch, as it is never entirely lost.
 You can easily restore it from the closed PR, or later on from reflog.
 
-[(top)](#contributing-to-a-github-project)
+[(top)](#github-contribution-guidelines)
 
 ## Deploying work to live environments
 
@@ -216,7 +216,7 @@ think about. Just `hub pull-request -b master`, and call it
 Once approved, your code will be merged in to `master`, where it will finally be
 complete and available to all.
 
-[(top)](#contributing-to-a-github-project)
+[(top)](#github-contribution-guidelines)
 
 # Git(Hub) Workflow Overview
 
@@ -284,4 +284,4 @@ follow work through the issue/pull request process.
    DO NOT MERGE THE CONFLICT BRANCH INTO PRODUCTION OR MASTER.
 
 
-[(top)](#contributing-to-a-github-project)
+[(top)](#github-contribution-guidelines)
