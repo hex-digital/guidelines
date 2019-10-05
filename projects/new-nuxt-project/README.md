@@ -34,4 +34,9 @@ As we don't want to maintain a skeleton theme as Nuxt advances, it is easier for
 
 ## Setup Stylelint
 
-## Setup typescript
+## Setup Typescript
+
+## Setup storybook
+- `npx -p @storybook/cli sb init`
+- `yarn storybook`
+- https://storybook.js.org/docs/basics/introduction/
