@@ -13,26 +13,40 @@ As we don't want to maintain a skeleton theme as Nuxt advances, it is easier for
     - `yarn add sass-loader node-sass @nuxtjs/style-resources`
 - Add style-resources to modules sections, and styleResources key for settings
 
-        export default {
-          /*
-           ** Global CSS
-           */
-          css: ['assets/scss/app.scss'],
-          /*
-           ** StyleResources: SCSS to load in all Vue components - don't load any outputted CSS here, just settings + tools
-           */
-          styleResources: {
-           scss: ['assets/scss/settings-tools.scss'],
-          },
-          /*
-           ** Nuxt.js modules
-           */
-          modules: [
-            '@nuxtjs/style-resources',
-          ],
-        }
+      export default {
+        /*
+         ** Global CSS
+         */
+        css: ['assets/scss/app.scss'],
+        /*
+         ** StyleResources: SCSS to load in all Vue components - don't load any outputted CSS here, just settings + tools
+         */
+        styleResources: {
+         scss: ['assets/scss/settings-tools.scss'],
+        },
+        /*
+         ** Nuxt.js modules
+         */
+        modules: [
+          '@nuxtjs/style-resources',
+        ],
+      }
+
+## Setup Prettier
+- Ensure Prettier was selected when initialising the project (or it's a pain)
+- Replace the contents of prettier.rc with the one in this repo 
 
 ## Setup Stylelint
+- Install stylelint, and Nuxt's stylelint module
+- `yarn add --dev stylelint @nuxtjs/stylelint-module`
+- Add stylelint-module to Nuxt's build modules
+
+      export default {
+        buildModules: [
+          // Doc: https://github.com/nuxt-community/stylelint-module
+          '@nuxtjs/stylelint-module',
+        ]
+      }
 
 ## Setup Typescript
 
