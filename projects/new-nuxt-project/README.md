@@ -54,3 +54,25 @@ As we don't want to maintain a skeleton theme as Nuxt advances, it is easier for
 - `npx -p @storybook/cli sb init`
 - `yarn storybook`
 - https://storybook.js.org/docs/basics/introduction/
+- If getting an issue with core-js modules:
+- **ONLY IF GETTING ISSUE** `yarn add -D core-js@3 @babel/runtime-corejs3`
+- See https://nuxtjs.org/guide/release-notes/#v2.6.0 for details
+
+      export default {
+        build: {
+          babel: {
+            presets({ isServer }) {
+              return [
+                [
+                  require.resolve('@nuxt/babel-preset-app'),
+                  // require.resolve('@nuxt/babel-preset-app-edge'), // For nuxt-edge users
+                  {
+                    buildTarget: isServer ? 'server' : 'client',
+                    corejs: { version: 3 }
+                  }
+                ]
+              ]
+            }
+          }
+        }
+      }
