@@ -45,7 +45,7 @@ As we don't want to maintain a skeleton theme as Nuxt advances, it is easier for
       export default {
         buildModules: [
           // Doc: https://github.com/nuxt-community/stylelint-module
-          '@nuxtjs/stylelint-module',
+          ['@nuxtjs/stylelint-module', { syntax: 'scss' }],
         ]
       }
 
