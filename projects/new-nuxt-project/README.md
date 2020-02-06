@@ -39,6 +39,7 @@ As we don't want to maintain a skeleton theme as Nuxt advances, it is easier for
 ## Setup Stylelint
 - Install stylelint, and Nuxt's stylelint module
 - `yarn add --dev stylelint @nuxtjs/stylelint-module`
+- Copy the stylelint.config.js file from this repo
 - Add stylelint-module to Nuxt's build modules
 
       export default {
@@ -48,7 +49,13 @@ As we don't want to maintain a skeleton theme as Nuxt advances, it is easier for
         ]
       }
 
+- For Hex's default setup (recommended), copy the stylelint.config.js file from this repo
+- Install the following packages which add further rules
+- `yarn add --dev @mapbox/stylelint-processor-arbitrary-tags stylelint-scss stylelint-order stylelint-prettier`
+- If not using prettier, remove thr stylelint-prettier dependency, and any references to prettier in the stylelint config file
+
 ## Setup Typescript
+- TBC (Refer to Whirli repo)
 
 ## Setup storybook
 - `npx -p @storybook/cli sb init`
