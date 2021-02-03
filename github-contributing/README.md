@@ -16,7 +16,7 @@ scroll to the end, to the [Git(Hub) Workflow Overview](#github-workflow-overview
 - [Deploying work to live environments](#deploying-work-to-live-environments)
   - [Staging](#staging)
   - [Production](#production)
-  - [Master](#master)
+  - [Main](#main)
 - [Git(Hub) Workflow Overview](#github-workflow-overview)
   - [Submitting to a release branch](#submitting-to-a-release-branch)
   - [Deploying a release branch](#deploying-a-release-branch)
@@ -39,6 +39,7 @@ categories:
 * change
 * bugfix
 * hotfix
+* debt
 
 For JIRA issues, the type of branch will usually be specified by the ticket type
 field. If not, simply decide the type yourself, and make a note of it on the
@@ -60,26 +61,30 @@ For JIRA issues, that will be the issue ID, listed on the issue itself.
 
     <type>/<CODE>-XXX  # e.g. change/PCS-12, feature/SS-124, bugfix/HSB-96
 
-Simply create your branch with the name as above, branching from `master`.
+Simply create your branch with the name as above, branching from `main`.
 
-    git checkout master
+    git checkout main
     git pull
     git checkout -b <branch-name>
     git push -u origin <branch-name>
     
-> NOTE If the site has not launched yet, and your tickets are going into development (they have Fix Version v1.0.0), then you should branch from the development branch instead of master, as this will be the current base branch. When the site launches, master will be the base branch, and you can branch from there instead.
+> NOTE If the site has not launched yet, and your tickets are going into development (they have Fix Version v1.0.0), then you should branch from the development branch instead of main, as this will be the current base branch. When the site launches, main will be the base branch, and you can branch from there instead.
 
 [(top)](#github-contribution-guidelines)
 
 ## Committing your work
 
-All commits in the branch must start with `[<CODE>-XXX]` on the commit message,
-e.g. `[PCS-608]`.
+At Hex we try to follow [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/). 
 
-They should then go on to have a short explanation of what has been done in
-that commit, e.g:
+In its simplest form, each commit should start with one of the predefined types, usually `feat`, `fix` or `refactor`.
 
-    [PCS-608] Change primary colors from red to green
+Then it should be tagged with the ticket it's for, e.g. `PCS-608`. 
+
+Finally a short explanation of what the commit does should be written. This message should fit into the sentence "Applying this commit will ______".
+
+Altogether that might look like:
+
+    feat(PCS-608): change primary colors from red to green
 
 This allows us to easily see which issue each addition came from and what it's
 for.
@@ -97,7 +102,7 @@ the `development` branch, or a `release` branch.
 
 ### The development branch
 
-When a site is not yet launched, the development branch should be used instead of a release branch. It is easy to check this as the master branch will be behind the production branch, or production will not exist yet.
+When a site is not yet launched, the development branch should be used instead of a release branch. It is easy to check this as the main branch will be behind the production branch, or production will not exist yet.
 
 All issues that will be going into the development branch will have a Fix Version of v1.0.0, so they are easy to identify in JIRA.
 
@@ -105,7 +110,7 @@ Simply pull-request into the development branch, following the below guidelines,
 
 ### The release branch
 
-When a site has been launched, and master is the same as production, we move to the release branch structure.
+When a site has been launched, and main is the same as production, we move to the release branch structure.
 
 Once your code is complete and pushed to origin, it needs to go into a release
 branch. A release branch is of the form `release-XXXXX` and is used to group
@@ -138,7 +143,7 @@ First of all, ensure your issue in JIRA has a Fix Version, then find the ID of
 that version's release. You can do this by opening the Releases tab in the side
 bar, then clicking on the release name. It will be in the URL.
 
-Next, create the branch from `master`, called `release-XXXXX`, where XXXXX is
+Next, create the branch from `main`, called `release-XXXXX`, where XXXXX is
 the release ID, and push this to origin. Finally, pull-request your work in to
 it, using `hub pull-request -b release-XXXXX` or [GitHub](https://github.com).
 
@@ -204,16 +209,16 @@ The first is that **the deployment hook is now `[deploy: production]`**.
 The second is the title should be `Production Deployment vX.X.X`.
 
 And the last is that, when creating a Production PR, you must also create the
-PR to the `master` branch as well. **`master` and `production` must be updated
+PR to the `main` branch as well. **`main` and `production` must be updated
 simultaneously, and kept in sync.**
 
-### Master
+### Main
 
-Master is the most simple - there is no deployment hook and no other PRs to
-think about. Just `hub pull-request -b master`, and call it
-`Master Release vX.X.X`.
+Main is the most simple - there is no deployment hook and no other PRs to
+think about. Just `hub pull-request -b main`, and call it
+`Main Release vX.X.X`.
 
-Once approved, your code will be merged in to `master`, where it will finally be
+Once approved, your code will be merged in to `main`, where it will finally be
 complete and available to all.
 
 [(top)](#github-contribution-guidelines)
@@ -256,9 +261,9 @@ follow work through the issue/pull request process.
 
 1. **Create a Pull Request from your release to the environment branch.** These
    branches will be called `staging` or `production`. When PRing to Production,
-   ALWAYS create a second PR to `master` as well for the same release.
+   ALWAYS create a second PR to `main` as well for the same release.
 2. **Name the Pull Request correctly.** That is, `Staging|Production Deployment
-   v1.0.0` or `Master Release v1.0.0` where the version is the Release Name in
+   v1.0.0` or `Main Release v1.0.0` where the version is the Release Name in
    JIRA.
 3. **Once approved, deploy using the deploy hook.** `[deploy: staging]` or
    `[deploy: production]` on the commit message.
@@ -267,10 +272,10 @@ follow work through the issue/pull request process.
 
 ## Deploying a release branch that has conflicts
 
-0. If you're deploying to Production, you just need to merge master into your
+0. If you're deploying to Production, you just need to merge main into your
    release branch and solve conflicts there. If after doing this and pushing,
    you still have conflicts, please contact a senior developer.
-1. For Staging, **create a `conflict-XXXXX` branch from master**, where XXXXX is
+1. For Staging, **create a `conflict-XXXXX` branch from main**, where XXXXX is
    the same ID as the release branch has.
 2. **Merge Staging into the conflict branch** using a regular merge, e.g. `git
    merge staging`.
@@ -281,7 +286,7 @@ follow work through the issue/pull request process.
    deployed to Production.
 5. **Create a pull request to Staging from `conflict-XXXXX`** and then proceed as
    above, making sure the conflict branch is immediately deleted on merge.
-   DO NOT MERGE THE CONFLICT BRANCH INTO PRODUCTION OR MASTER.
+   DO NOT MERGE THE CONFLICT BRANCH INTO PRODUCTION OR MAIN.
 
 
 [(top)](#github-contribution-guidelines)
