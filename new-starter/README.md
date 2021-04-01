@@ -42,3 +42,43 @@ sensitive or personal information, and so try to keep private messages to a mini
 For any decisions or outcomes, please try to record them in JIRA, with reference
 to Slack messages if need be. Information can be easily lost in Slack, so JIRA
 is the place to keep it sacred.
+
+## WordPress
+
+A number of Hex's brochure websites run on WordPress. Usually, the repo
+in GitHub will contain setup instructions for these websites, but overall
+Hex recommends the following local setup:
+
+### Local WP - https://localwp.com/
+
+This is a self-contained docker environment built for the quick setup
+and maintenance of local WordPress environments. We thoroughly recommend it
+over entry-level solutions like MAMP, or more time-consuming solutions like
+Apache vhosts or maintaining docker instances per projects.
+
+### Migrate DB Pro - https://deliciousbrains.com/wp-migrate-db-pro/
+
+This is a plugin that allows the pushing and pulling of Database, Plugins,
+Media and Theme files from one environment to another. This is the recommended
+way of downloading a copy of the Production database and Plugins, ready
+to get cracking on local development.
+
+Login details for the platform can be found in Hex's Password Manager
+application, and from there you can get the license key to enable its use.
+
+You'll need to install 3 plugins to access all database, plugins, media and theme,
+and they'll also need to be installed on the server you're downloading from.
+Then just follow instructions in the plugin, or ask a team lead or lead engineer
+for help.
+
+### BE Media From Production - https://github.com/billerickson/BE-Media-from-Production
+
+You may not want to load multiple GB of images locally for each website
+you work on. To bypass this, you can use the BE Media From Production plugin
+locally. 
+
+When activated and configured, this will attempt to load images from your local
+development environment. If they don't exist, it will then attempt to load
+the same images from the Production URL specified. This means you can have
+an empty `uploads` directory locally, and still see all images in your
+local environment.
