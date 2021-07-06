@@ -28,102 +28,83 @@ Before making any updates to a repository, you need a branch to work on.
 
 Branches are always of the form
 
-    <type>/<CODE>-XXX
+    <type>/<TICKET-ID>
+    
+E.G.
+
+    feat/AUB-126
 
 ### Type
 
-The first part of the branch, the TYPE, will fall into one of the following
-categories:
+The first part of the branch, the TYPE, is based on [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/).  
+The two most common are:
 
-* feature
-* change
-* bugfix
-* hotfix
-* debt
+* feat
+* fix
 
-For JIRA issues, the type of branch will usually be specified by the ticket type
-field. If not, simply decide the type yourself, and make a note of it on the
-ticket description.
+Other types are listed at https://www.conventionalcommits.org/en/v1.0.0/.  
+Choose whichever you think fits best.
 
-### Code
+### Ticket ID
 
-The second part of the branch names show which project it is for.
+The second part of the branch name is the ticket ID.
 
-For JIRA issues, it will be the associated project code (2-4 letters) from JIRA.
+For JIRA issues, it will be the ticket ID in JIRA.
 
-E.G. `POR` for Portal, or `AUB` for Aubaine.
-
-### Reference Number
-
-The final part, the reference number, will be the ID of the issue.
-
-For JIRA issues, that will be the issue ID, listed on the issue itself.
-
-    <type>/<CODE>-XXX  # e.g. change/PCS-12, feature/SS-124, bugfix/HSB-96
+E.G. `POR-98`, or `AUB-126`.
 
 Simply create your branch with the name as above, branching from `main`.
 
     git checkout main
     git pull
-    git checkout -b <branch-name>
-    git push -u origin <branch-name>
-    
-> NOTE If the site has not launched yet, and your tickets are going into development (they have Fix Version v1.0.0), then you should branch from the development branch instead of main, as this will be the current base branch. When the site launches, main will be the base branch, and you can branch from there instead.
+    git checkout -b feat/AUB-126
+    git push -u origin feat/AUB-126
 
 [(top)](#github-contribution-guidelines)
 
 ## Committing your work
 
-At Hex we try to follow [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/). 
+Our commits also try to follow [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/).
 
-In its simplest form, each commit should start with one of the predefined types, usually `feat`, `fix` or `refactor`.
+In its simplest form, each commit should:
 
-Then it should be tagged with the ticket it's for, e.g. `PCS-608`. 
-
-Finally a short explanation of what the commit does should be written. This message should fit into the sentence "Applying this commit will ______".
+- Start with one of the predefined types
+- Be tagged with its ticket ID
+- Have a short explanation of what the commit does. This message should fit into the sentence "Applying this commit will ______".
 
 Altogether that might look like:
 
     feat(PCS-608): change primary colors from red to green
 
-This allows us to easily see which issue each addition came from and what it's
-for.
+This allows us to easily see which issue each addition came from and what it's for.
 
-Remember to commit often, and never to rewrite commit history once you've pushed
-to origin. However, before pushing your commits, you're free to rebase and
+Remember to commit often, and try to never rewrite commit history once you've pushed
+to GitHub. However, before pushing your commits, you're free to rebase and
 rewrite as you like.
 
 [(top)](#github-contribution-guidelines)
 
 ## Submitting work for review
 
-When submitting work for review, there are two options:
-the `development` branch, or a `release` branch.
+When submitting work for review, there are a few options:
+the `main` branch, a `release-xxxxx` branch, or an environment like `staging` or `production`.
 
-### The development branch
+If you're not sure which branch you should be submitting to, ask the tech lead
+or another senior on the project.
 
-When a site is not yet launched, the development branch should be used instead of a release branch. It is easy to check this as the main branch will be behind the production branch, or production will not exist yet.
+### The main branch
 
-All issues that will be going into the development branch will have a Fix Version of v1.0.0, so they are easy to identify in JIRA.
-
-Simply pull-request into the development branch, following the below guidelines, as if it were a release branch.
+- Used when a site has not yet launched, or for some small sites with only one environment
+- Submit a pull-request to `main`, following the below guidelines
 
 ### The release branch
 
-When a site has been launched, and main is the same as production, we move to the release branch structure.
+- Used for busy projects where batches of code are released at a time
+- Releases are created in JIRA, and tickets are tagged with a Fix Version that matches the release name
+- A Release branch is created which matches the ID of the Release in JIRA - e.g. `release-17762`. It should be created from `main`.
+- Submit a pull-request to the release branch matching the Fix Version of your JIRA ticket
 
-Once your code is complete and pushed to origin, it needs to go into a release
-branch. A release branch is of the form `release-XXXXX` and is used to group
-issues together ready to be deployed to Staging, Production or merged into the
-base branch.
-
-Release branches are important as they make deployments easier to track and
-more straight forward.
-
-Each issue in JIRA must have a release branch attached, and this is done via the
-"Fix Version" field on an issue, where you enter the release name (e.g. v1.0.0).
-
-### Creating a release branch
+#### Creating a release branch
 
 To get a release branch, a release must be made in the related JIRA project.
 
@@ -131,46 +112,27 @@ The ID of the release (NOT the name/title) will be a 5 digit number, and you can
 find this number in the releases URL on JIRA.
 
 The name of the release must conform to [Semantic Versioning](https://semver.org/),
-and should increment from the most recent release.
+and should increment from the most recent release - e.g. 1.0.10
 
 If your code is a bugfix, it should increment the patch version number. If it's
 a change or a small feature, the minor version. And if it's a large feature or
 an overhaul of some kind, it should be a major version.
 
-### Pull Requesting to the release branch
+### The environment branches
 
-First of all, ensure your issue in JIRA has a Fix Version, then find the ID of
-that version's release. You can do this by opening the Releases tab in the side
-bar, then clicking on the release name. It will be in the URL.
+- Used once a site has launched but the project is not busy enough to need releases
+- Submit a pull-request to the environment branch - e.g. `staging` or `production`
 
-Next, create the branch from `main`, called `release-XXXXX`, where XXXXX is
-the release ID, and push this to origin. Finally, pull-request your work in to
-it, using `hub pull-request -b release-XXXXX` or [GitHub](https://github.com).
+### Creating a Pull Request
 
->It is advised to alias git to hub in your ~/.bashrc or equivalent, as hub
-extends all git functionality. Then you can use `git pull-request ...` instead.
+You can create a pull-request at github.com or using the [github CLI](https://cli.github.com/).
 
-You must prefix the PR with the same refs as the commit (`[<CODE>-XXX]`),
-followed by a short title describing the pull request.
-
-You must also include a longer description, detailing why something was
-required, and how you completed the requirements. An example is below:
-
-    [AUB-126] Add menu filtering
-    Why?
-    * The menu pages required a filtering method for dietary needs
-
-    How?
-    * The filters were built as per the designs in Zeplin
-    * Tags were used to categorise menu items
-    * JavaScript click events add the filters to an array, and then fade out
-    items which are not associated with every tag in the array
+When creating the pull-request, always add a description, a link to the JIRA ticket and screenshots if appropriate.
 
 Once approved, you'll be able to merge your code into the release, and then
 delete the original branch.
 
->Do not worry about deleting the original branch, as it is never entirely lost.
-You can easily restore it from the closed PR, or later on from reflog.
+> The original branch is never entirely deleted. You can easily restore it from the closed PR, or later on from reflog.
 
 [(top)](#github-contribution-guidelines)
 
@@ -231,31 +193,28 @@ If you would like to submit a pull request, please follow the below Git
 process/workflow. It helps to give us a better paper-trail, and allows us to
 follow work through the issue/pull request process.
 
-1. **Ensure there is an issue created for the proposed addition/change/fix.**
-   This provides a central home for all discussion related to an issue, be it
-   on GitHub or JIRA issues.
-2. **Create a new branch in the style `<type>/<CODE>-XXX`.** Please read the
+1. **Ensure there is an issue created for the proposed addition/change/fix.**  
+    This provides a central home for all discussion related to an issue, be it
+    on GitHub or JIRA issues.
+2. **Create a new branch in the style `<type>/<TICKET-ID>`.**  
+    Please read the
     [Branch Naming Convention](#branch-naming-convention) section above for
     where these values come from.
-3. **Ensure all unit tests are passing**, and tests are added or updated
-   appropriately for any new code.
-4. **Start all commit messages with a reference `[<CODE>-XXX]`.** e.g.
-   `[PCS-124] Fix typo on homepage`.
-5. **Delineate your changes in CHANGELOG.md** if there is one in the project.
-   Under “[Unreleased]”, make an entry in the the appropriate section, i.e.
-   "Fixes", "Breaking changes", "New features" or "Minor changes", in that order.
-6. **Ensure your issue has a Fix Version attached**, as this is the release that
-   the ticket must go in to.
-7. **Create a release branch `release-XXXXX`** where XXXXX is the ID of the
-   release attached to the issue, from the URL of the release page. If the site
-   is not live, use the `development` branch as this release.
-8. **Create a Pull Request from your branch to the release branch.** This should
-   contain a message stating Why you've made changed, and How you've made them.
-   The title should also use the same reference `[<CODE>-XXX]` as all the commit
-   messages. It should also contain a link to the JIRA ticket in question.
-9. **Once approved, merge and delete the source branch.** This is required to
-   keep the repository branches clean. You can easily restore the branch from
-   within the closed Pull Request in GitHub.
+3. **Ensure all unit tests are passing**.  
+    and tests are added or updated appropriately for any new code.
+4. **Start all commit messages with a reference `type(TICKET-ID):`.**  
+    e.g. `fix(PCS-124): fix typo on homepage`.
+5. **Delineate your changes in CHANGELOG.md**  
+    if there is one in the project. Under “[Unreleased]”, make an entry in 
+    the the appropriate section, i.e. "Fixes", "Breaking changes", 
+    "New features" or "Minor changes", in that order.
+6. **Create a Pull Request from your branch to the base branch.**  
+    This should contain a description about the changes, usually stating why and sometimes how.
+    The title should also use the same reference `type(TICKET-ID):` as all the commit
+    messages. It should also contain a link to the JIRA ticket in question.
+7. **Once approved, merge and delete the source branch.**  
+    This is required to keep the repository branches clean. You can easily restore the branch from
+    within the closed Pull Request in GitHub.
 
 ## Deploying a release branch
 
